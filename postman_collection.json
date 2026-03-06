@@ -1,0 +1,319 @@
+{
+    "info": {
+        "name": "Vymio Backend API - Authentication",
+        "description": "Complete authentication API with Supabase",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Health Check",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{baseUrl}}/health",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "health"
+                    ]
+                },
+                "description": "Check if the server is running"
+            }
+        },
+        {
+            "name": "Sign Up",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"phoneNumber\": \"+1234567890\"\n}"
+                },
+                "url": {
+                    "raw": "{{baseUrl}}/api/auth/signup",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "auth",
+                        "signup"
+                    ]
+                },
+                "description": "Register a new user. Email confirmation will be sent."
+            }
+        },
+        {
+            "name": "Login",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}"
+                },
+                "url": {
+                    "raw": "{{baseUrl}}/api/auth/login",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "auth",
+                        "login"
+                    ]
+                },
+                "description": "Login with email and password. Returns access token and refresh token."
+            }
+        },
+        {
+            "name": "Verify Email",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"email\": \"user@example.com\",\n  \"token\": \"123456\"\n}"
+                },
+                "url": {
+                    "raw": "{{baseUrl}}/api/auth/verify-email",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "auth",
+                        "verify-email"
+                    ]
+                },
+                "description": "Verify email address using OTP token sent to email."
+            }
+        },
+        {
+            "name": "Resend Confirmation",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"email\": \"user@example.com\"\n}"
+                },
+                "url": {
+                    "raw": "{{baseUrl}}/api/auth/resend-confirmation",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "auth",
+                        "resend-confirmation"
+                    ]
+                },
+                "description": "Resend email confirmation if not received."
+            }
+        },
+        {
+            "name": "Refresh Token",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}"
+                },
+                "url": {
+                    "raw": "{{baseUrl}}/api/auth/refresh-token",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "auth",
+                        "refresh-token"
+                    ]
+                },
+                "description": "Get a new access token using refresh token."
+            }
+        },
+        {
+            "name": "Reset Password Request",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"email\": \"user@example.com\"\n}"
+                },
+                "url": {
+                    "raw": "{{baseUrl}}/api/auth/reset-password-request",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "auth",
+                        "reset-password-request"
+                    ]
+                },
+                "description": "Request password reset. Email will be sent with reset link."
+            }
+        },
+        {
+            "name": "Get Current User",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{accessToken}}",
+                        "description": "Access token from login"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/api/auth/me",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "auth",
+                        "me"
+                    ]
+                },
+                "description": "Get current authenticated user information."
+            }
+        },
+        {
+            "name": "Logout",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{accessToken}}",
+                        "description": "Access token from login"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/api/auth/logout",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "auth",
+                        "logout"
+                    ]
+                },
+                "description": "Logout current user and invalidate session."
+            }
+        },
+        {
+            "name": "Update Password",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{accessToken}}",
+                        "description": "Access token from login"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"newPassword\": \"newpassword123\"\n}"
+                },
+                "url": {
+                    "raw": "{{baseUrl}}/api/auth/update-password",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "auth",
+                        "update-password"
+                    ]
+                },
+                "description": "Update user password (requires authentication)."
+            }
+        },
+        {
+            "name": "Get Profile (Email Verified)",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{accessToken}}",
+                        "description": "Access token from login"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/api/auth/profile",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "auth",
+                        "profile"
+                    ]
+                },
+                "description": "Example protected route that requires email verification."
+            }
+        }
+    ],
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:3000",
+            "type": "string"
+        },
+        {
+            "key": "accessToken",
+            "value": "",
+            "type": "string"
+        },
+        {
+            "key": "refreshToken",
+            "value": "",
+            "type": "string"
+        }
+    ]
+}
