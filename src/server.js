@@ -58,11 +58,14 @@ app.use((err, req, res, next) => {
     });
 });
 
-// Start server
-app.listen(PORT, () => {
+// Start server ONLY if not in production (Vercel)
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
     console.log(`🚀 Server is running on port ${PORT}`);
     console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
     console.log(`🔗 Health check: http://localhost:${PORT}/health`);
-});
+  });
+}
 
+// Export the app for Vercel
 export default app;
